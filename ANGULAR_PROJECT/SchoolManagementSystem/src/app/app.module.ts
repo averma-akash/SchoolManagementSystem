@@ -8,18 +8,24 @@ import { RegistrationComponent } from './Component/registration/registration.com
 import { LoginComponent } from './Component/login/login.component';
 import { ErrorComponent } from './Component/error/error.component';
 import { ConfigService } from 'src/environments/environment';
+import { FormsModule } from '@angular/forms';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastComponent } from './Component/toast/toast.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    ErrorComponent
+    ErrorComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbModalModule,
+    FormsModule
   ],
   providers: [
     {

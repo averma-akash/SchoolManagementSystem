@@ -5,24 +5,49 @@
                 <div class="auth-avatar">
                     <img src="../../../assets/Images/user_icon.png" class="user-image">
                 </div>
-                <form>
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
                     <div class="form-group">
                         <label for="name">Name : </label>
-                        <input type="text" name="name" class="form-control" placeholder="Name">
+                        <input type="text" name="name" class="form-control" placeholder="Name"
+                            [(ngModel)]="regForm.name" required minlength="3" maxlength="20" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && name.errors }" />
+
+                        <div class="invalid-feedback" *ngIf="name.errors && f.submitted">
+                            <div *ngIf="name.errors['required']">Name is required</div>
+                            <div *ngIf="name.errors['minlength']">
+                                Name must be at least 3 characters
+                            </div>
+                            <div *ngIf="name.errors['maxlength']">
+                                Name must be at most 20 characters
+                            </div>
+                        </div>
                     </div>
-                    
                     <div class="form-group">
                         <label for="email">Email : </label>
-                        <input type="text" name="email" class="form-control" placeholder="Email">
+                        <input type="email" name="email" class="form-control" placeholder="Email"
+                            [(ngModel)]="regForm.email" required email #email="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && email.errors }" />
+                        <div class="invalid-feedback" *ngIf="email.errors && f.submitted">
+                            <div *ngIf="email.errors['required']">Email is required</div>
+                            <div *ngIf="email.errors['email']">
+                                Email must be a valid email address
+                            </div>
+
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="password">Password : </label>
-                        <input type="password" name="password" class="form-control" placeholder="********">
+                        <input type="password" name="password" class="form-control" placeholder="********"
+                            [(ngModel)]="regForm.password" required minlength="6" #password="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && password.errors }">
+                        <div class="invalid-feedback" *ngIf="password.errors && f.submitted">
+                            <div *ngIf="password.errors['required']">Password is required</div>
+                            <div *ngIf="password.errors['minlength']">
+                                Password must be at least 6 characters
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="c_password">Confirm Password : </label>
-                        <input type="password" name="c_password" class="form-control" placeholder="********">
-                    </div>
+                    
                     <!-- <div class="form-group">
                         <label for="sex">Sex : </label><br>
                         <div class="form-check form-check-inline">
@@ -36,28 +61,48 @@
                     </div> -->
                     <div class="form-group">
                         <label for="userType">Register As : </label><br>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="userType" id="inlineRadio1" value="student">
-                        <label class="form-check-label" for="student">  Student</label>
+                        <div class="form-check form-check-inline">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="userType" id="inlineRadio1"
+                                    value="student" [(ngModel)]="regForm.registerAs" required #userType="ngModel"
+                                    [ngClass]="{ 'is-invalid': f.submitted && userType.errors }">
+                                <label class="form-check-label" for="student"> Student</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="userType" id="inlineRadio2"
+                                    value="teacher" [(ngModel)]="regForm.registerAs" required #userType="ngModel"
+                                    [ngClass]="{ 'is-invalid': f.submitted && userType.errors }">
+                                <label class="form-check-label" for="teacher">Teacher</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="userType" id="inlineRadio3"
+                                    value="admin" [(ngModel)]="regForm.registerAs" required #userType="ngModel"
+                                    [ngClass]="{ 'is-invalid': f.submitted && userType.errors }">
+                                <label class="form-check-label" for="admin">Admin</label>
+
+                            </div>
+                            <div class="invalid-feedback" *ngIf="userType.errors && f.submitted">
+                                <div *ngIf="userType.errors['required']">User Type is required</div>
+
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="userType" id="inlineRadio2" value="teacher">
-                        <label class="form-check-label" for="teacher">Teacher</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="userType" id="inlineRadio3" value="admin">
-                        <label class="form-check-label" for="admin">Admin</label>
-                    </div>
-                </div>
                     <div class="text-center">
                         <input type="submit" class="btn btn-my" value="Sign Up">
                     </div>
-                    
+
                     <div class="text-center login">
                         Already have an account ? <a routerLink="/login">Login</a> here.
                     </div>
+                    <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                        Signup failed!<br />{{ errorMessage }}
+                      </div>
 
                 </form>
+                <div class="alert alert-success" *ngIf="isSuccessful">
+                    Your registration is successful!
+                  </div>
             </div>
         </div>
     </div>

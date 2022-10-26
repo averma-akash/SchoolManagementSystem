@@ -1,6 +1,7 @@
 {
     "status" : "Success",
     "data" : {
-        "userLogin" : "http://localhost:8080/userLogin"
+        "userLogin" : "http://localhost:8080/userLogin",
+        "userRegistration" : "http://localhost:8080/registration"
     }
 }

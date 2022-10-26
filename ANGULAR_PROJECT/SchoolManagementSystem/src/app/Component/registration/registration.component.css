@@ -3,9 +3,10 @@
  margin:0px;
  height:100%;
  width:100%;
- background:url('../../../assets/Images/reg_background.jpg') no-repeat center center scroll; 
+ background:url('../../../assets/Images/reg_background.jpg') no-repeat; 
  -webkit-background-size:cover;
- -o-background-size:cover;
+ background-size:cover;
+ min-height: 100vh;
  -moz-background-size:cover;
  background-size:cover;
 }
@@ -16,7 +17,7 @@
     background: -webkit-linear-gradient(to bottom, #240b36, #c31432);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to bottom, #240b36, #c31432); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border-radius: 5px;
-    box-shadow: 0px 0px 30px #f7f7f7;
+    box-shadow: 10px 0px 30px #f7f7f7;
   }
   label{
     color: #fff;

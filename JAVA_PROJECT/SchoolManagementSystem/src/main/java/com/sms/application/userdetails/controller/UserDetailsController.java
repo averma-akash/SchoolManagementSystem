@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import com.sms.application.userdetails.pojo.RegistrationRequestPojo;
 import com.sms.application.userdetails.pojo.RegistrationResponsePojo;
 import com.sms.application.userdetails.service.UserDetailService;
 import com.sms.application.utils.AppConstants;
+import com.sms.application.utils.ApplicationGenericResponse;
 
 @RestController
 public class UserDetailsController {
@@ -19,14 +21,16 @@ public class UserDetailsController {
 	@Autowired
 	UserDetailService userDetails;
 	
-	@PostMapping(name = "/registration")
-	ResponseEntity<?> userRegitration(@Valid @RequestBody RegistrationRequestPojo registration) throws Exception{
+	@PostMapping(path = "/registration")
+	ApplicationGenericResponse<RegistrationResponsePojo> userRegitration(@Valid @RequestBody RegistrationRequestPojo registration) throws Exception{
 		
 		RegistrationResponsePojo userRegistration = userDetails.userRegistration(registration);
 		if(userRegistration.getMessage().equalsIgnoreCase(AppConstants.ALREADY_REGISTERED)) {
-			return ResponseEntity.badRequest().body(userRegistration);
+			//return ResponseEntity.badRequest().body(userRegistration);
+			return ApplicationGenericResponse.fail(userRegistration);
 		}
-		return null;
+		//return ResponseEntity.ok(userRegistration);
+		return ApplicationGenericResponse.success(userRegistration);
 	}
 
 }

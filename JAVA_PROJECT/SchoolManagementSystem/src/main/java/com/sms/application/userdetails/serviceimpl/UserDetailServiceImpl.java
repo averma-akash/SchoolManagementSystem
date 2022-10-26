@@ -30,7 +30,7 @@ public class UserDetailServiceImpl implements UserDetailService {
 	public RegistrationResponsePojo userRegistration(RegistrationRequestPojo registration) throws Exception {
 
 		RegistrationResponsePojo response = new RegistrationResponsePojo();
-		if (dao.findByemailId(registration.getEmail())) {
+		if (dao.findByemailId(registration.getEmail()) == null) {
 			response.setMessage(AppConstants.ALREADY_REGISTERED);
 			response.setUserId(null);
 			return response;
@@ -39,7 +39,7 @@ public class UserDetailServiceImpl implements UserDetailService {
 		user.setUserName(registration.getUserName());
 		user.setEmailId(registration.getEmail());
 		user.setUserPassword(encoder.encode(registration.getPassword()));
-		user.setRole(registration.getRole());
+		user.setRole(registration.getRole().toUpperCase());
 
 		UserDetailsDbPojo save = dao.save(user);
 
