@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ToastService } from 'src/app/_service/toast.service';
 import { UserService } from 'src/app/_service/user.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UserService } from 'src/app/_service/user.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  @Output() modalFunction: EventEmitter<any> = new EventEmitter();
+  //@Output() modalFunction = new EventEmitter();
 
   regForm: any = {
     name: null,
@@ -22,7 +23,8 @@ export class RegistrationComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private toastService : ToastService
   ) { }
 
   ngOnInit(): void { }
@@ -45,22 +47,33 @@ export class RegistrationComponent implements OnInit {
           console.log("data inside if:" + data);
           let toastObject = {
             title: "Registration Successful for (" + request.userName + ")",
-            desc: "<strong>your userId : " + data['userId'] + "</strong>",
-          }
-          this.modalFunction.emit(toastObject);
+            desc: "<strong>your userId : " + data['data']['userId'] + "</strong>",
+          };
+          this.showToastMessge(toastObject);
+        } else if(data && data['status'].toLowerCase() === 'fail') {
+          this.isSignUpFailed = true;
+          this.errorMessage = data['data']['message'];
+          let toastObject = {
+            title: "Unsuccesful !",
+            desc: "<strong>"+ data['data']['message'] + "</strong>",
+          };
+          this.showToastMessge(toastObject);
         }
       },
       error: err => {
-        console.log("data :" + err.error.message);
-        this.errorMessage = err.error.message;
+        
         this.isSignUpFailed = true;
-        // let toastObject = {
-        //   title: "Registration Successful for (" + request.userName + ")",
-        //   desc: "<strong>your userId : " + this.errorMessage + "</strong>",
-        // }
-        // this.modalFunction.emit(toastObject);
       }
     });
+
+  }
+  showToastMessge(toastObject) {
+    
+    let toastObbject = {
+      title: toastObject?.title,
+      desc: toastObject?.desc
+    };
+    this.toastService.show(toastObbject);
 
   }
 

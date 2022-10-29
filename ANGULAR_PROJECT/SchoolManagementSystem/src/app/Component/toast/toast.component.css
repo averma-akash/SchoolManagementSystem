@@ -1,0 +1,9 @@
+.toast {
+    margin-top: 7rem;
+    background-color: azure;
+    z-index: 99;
+    min-width: 18rem;
+    min-height: 5rem;
+    border-style: solid;
+    border-spacing: 5rem;
+}

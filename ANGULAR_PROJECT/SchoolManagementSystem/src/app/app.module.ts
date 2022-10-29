@@ -9,8 +9,9 @@ import { LoginComponent } from './Component/login/login.component';
 import { ErrorComponent } from './Component/error/error.component';
 import { ConfigService } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastComponent } from './Component/toast/toast.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,11 @@ import { ToastComponent } from './Component/toast/toast.component';
     AppRoutingModule,
     HttpClientModule,
     NgbModalModule,
+    NgbToastModule,
     FormsModule
+  ],
+  exports: [
+    NgbToastModule
   ],
   providers: [
     {

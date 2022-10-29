@@ -1,1 +1,29 @@
-<p>toast works!</p>
+<ngb-toast style="left: 50%; top: 20%; position: fixed; transform: translate(-50%, 0px); z-index: 9999;"
+*ngIf="msg.length > 0" [autohide]="true" [delay]="msg[0]?.delay ? msg[0]?.delay : toastTimeOut"
+(hidden)="onCancel()"
+[ngClass]="msg[0].isError ? 'border-danger' : 'border-success'">
+
+<ng-template [ngIf] = "msg[0].isError" [ngIfElse]="customTemplate">
+    <ng-template [ngTemplateOutlet]="errorTemplate"></ng-template>
+</ng-template>
+
+<ng-template #customTemplate>
+    <div class="text-center">
+        <button #cancelToast type="button" class="ml-2 mb-1 close" data-dismiss ="toast" aria-label="close"
+        (click)="onCancel()"><span arial-hidden="true" autoFocus>&times;</span></button>
+        
+        <div class="h4" [innerHTML]="msg[0].title"></div>
+        <div #descToast [innerHTML]="msg[0].desc"></div>
+    </div>
+</ng-template>
+<ng-template #errorTemplate>
+    <div class="border-danger">
+        <div class="toast-body text-center">
+            <button #cancelToast type="button" class="ml-2 mb-1 close" data-dismiss="toast" arial-label="close"
+            (click)="onCancel()"><span arial-hidden="true" autoFocus>&times;</span></button>
+            <div class="h4" [innerHTML]="msg[0].title"></div>
+         <div #descToast [innerHTML]="msg[0].desc"></div>
+        </div>
+    </div>
+</ng-template>
+</ngb-toast>
