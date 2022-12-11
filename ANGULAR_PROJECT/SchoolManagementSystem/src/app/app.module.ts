@@ -7,11 +7,10 @@ import { AppComponent } from './app.component';
 import { RegistrationComponent } from './Component/registration/registration.component';
 import { LoginComponent } from './Component/login/login.component';
 import { ErrorComponent } from './Component/error/error.component';
-import { ConfigService } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
 import { NgbModalModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastComponent } from './Component/toast/toast.component';
-import { ToastrModule } from 'ngx-toastr';
+import { EnvironmentConstants ,ConfigService } from '../environments/environment';
 
 @NgModule({
   declarations: [

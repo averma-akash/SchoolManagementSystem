@@ -10,8 +10,6 @@ import { UserService } from 'src/app/_service/user.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  //@Output() modalFunction = new EventEmitter();
-
   regForm: any = {
     name: null,
     email: null,
@@ -24,7 +22,7 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private toastService : ToastService
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void { }
@@ -40,7 +38,6 @@ export class RegistrationComponent implements OnInit {
     const response: Observable<any> = this.userService.userRegistration(request);
     response.subscribe({
       next: data => {
-        console.log("data" +data);
         if (data && data['status'].toLowerCase() === 'success') {
           this.isSuccessful = true;
           this.isSignUpFailed = false;
@@ -50,25 +47,25 @@ export class RegistrationComponent implements OnInit {
             desc: "<strong>your userId : " + data['data']['userId'] + "</strong>",
           };
           this.showToastMessge(toastObject);
-        } else if(data && data['status'].toLowerCase() === 'fail') {
+        } else if (data && data['status'].toLowerCase() === 'fail') {
           this.isSignUpFailed = true;
           this.errorMessage = data['data']['message'];
           let toastObject = {
             title: "Unsuccesful !",
-            desc: "<strong>"+ data['data']['message'] + "</strong>",
+            desc: "<strong>" + data['data']['message'] + "</strong>",
           };
           this.showToastMessge(toastObject);
         }
       },
       error: err => {
-        
+
         this.isSignUpFailed = true;
       }
     });
 
   }
   showToastMessge(toastObject) {
-    
+
     let toastObbject = {
       title: toastObject?.title,
       desc: toastObject?.desc

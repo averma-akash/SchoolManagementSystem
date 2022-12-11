@@ -12,11 +12,13 @@ export const environment = {
 
 export class Configuration {
   userLogin : string = '';
+  envName : String = '';
 }
 
 export class EnvironmentConstants {
   public static userLogin : string;
   public static userRegistration: string;
+  public static envName : String;
 }
 @Injectable(
   {providedIn:'root'})
@@ -38,6 +40,7 @@ export class ConfigService {
         next : (envData: { [x: string]: any; }) => {
           if(envData && envData[`status`].toLowerCase() === 'success'){
             const data = envData['data'];
+            EnvironmentConstants.envName = data.envName;
             EnvironmentConstants.userLogin = data.userLogin;
             EnvironmentConstants.userRegistration = data.userRegistration;
           }

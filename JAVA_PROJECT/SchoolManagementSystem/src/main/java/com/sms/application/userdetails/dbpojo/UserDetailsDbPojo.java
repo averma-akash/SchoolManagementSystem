@@ -19,13 +19,20 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@SequenceGenerator(
+	    name = "USER_REGISTRATION_SEQ",
+	    allocationSize = 1
+	)
 public class UserDetailsDbPojo implements Serializable {
 	
 	private static final long serialVersionUID = -5506469932248744738L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(
+		    strategy = GenerationType.SEQUENCE,
+		    generator = "USER_REGISTRATION_SEQ"
+		)
 	@Column(name = "USER_ID")
-	private BigDecimal userId;
+	private Long userId;
 	@Column(name = "USER_PASSWORD")
 	private String userPassword;
 	@Column(name = "ROLE")

@@ -3,15 +3,6 @@ import { Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { EnvironmentConstants } from 'src/environments/environment';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    //     'Access-Control-Allow-Origin': 'http://localhost:4200',
-    //     'Access-Control-Allow-Headers': 'Origin,X-Requested-With,Content-Type,Accept',
-    //     'Access-Control-Allow-Methods' : 'GET,POST,PUT,PATCH,DELETE,OPTIONS'
-  })
-};
-
 @Injectable({
   providedIn: 'root'
 })
@@ -22,20 +13,12 @@ export class UserService {
   ) { }
 
   userRegistration(registrationPayload): Observable<any> {
-    console.log(EnvironmentConstants.userRegistration);
-    console.log(registrationPayload);
-    // console.log(httpOptions);
+    console.log("URL " +EnvironmentConstants.userRegistration);
     return this.httpClient.post(EnvironmentConstants.userRegistration, registrationPayload)
-    // .pipe(
-    //     tap(data =>
-    //     console.log('All: ' + JSON.stringify(data)))
-    //   );;
   }
-}
 
-export class RegistrationSuccessfull {
-  message: string = '';
-  userId: string = '';
-
-  constructor() { }
+  userLogin(loginPayload): Observable<any> {
+    console.log("URL " +EnvironmentConstants.userLogin);
+    return this.httpClient.post(EnvironmentConstants.userLogin, loginPayload)
+  }
 }
