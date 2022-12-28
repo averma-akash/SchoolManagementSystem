@@ -18,8 +18,9 @@ public class UserLoginServiceImpl implements UserDetailsService{
 
   @Transactional
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-	  UserDetailsDbPojo user = dao.findByemailId(username)
-        .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+	  UserDetailsDbPojo user = dao.findByemailId(username);
+	  if(user == null)
+        throw new UsernameNotFoundException("User Not Found with username: " + username);
 	  
 	  UserDetailsPojo users = new UserDetailsPojo();
 	  users.setEmail(user.getEmailId());

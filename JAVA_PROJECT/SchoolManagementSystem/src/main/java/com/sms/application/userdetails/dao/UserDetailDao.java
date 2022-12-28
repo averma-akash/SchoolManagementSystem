@@ -11,5 +11,5 @@ import com.sms.application.userdetails.dbpojo.UserDetailsDbPojo;
 @Repository
 public interface UserDetailDao extends JpaRepository<UserDetailsDbPojo, BigDecimal> {
 
-	Optional<UserDetailsDbPojo> findByemailId(String email);
+	UserDetailsDbPojo findByemailId(String email);
 }

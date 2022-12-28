@@ -39,7 +39,7 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
 			if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
 				String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
-				Optional<UserDetailsDbPojo> userDetails = userDetailsService.findByemailId(username);
+				Optional<UserDetailsDbPojo> userDetails = Optional.ofNullable(userDetailsService.findByemailId(username));
 
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 						userDetails, null, null);
