@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { NgbModalModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastComponent } from './Component/toast/toast.component';
 import { EnvironmentConstants ,ConfigService } from '../environments/environment';
+import { TeacherDashboardComponent } from './Component/dashboard/teacher/teacher-dashboard/teacher-dashboard.component';
+import { StudentDashboardComponent } from './Component/dashboard/student/student-dashboard/student-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { EnvironmentConstants ,ConfigService } from '../environments/environment
     RegistrationComponent,
     LoginComponent,
     ErrorComponent,
-    ToastComponent
+    ToastComponent,
+    TeacherDashboardComponent,
+    StudentDashboardComponent
   ],
   imports: [
     BrowserModule,

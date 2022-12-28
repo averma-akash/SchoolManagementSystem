@@ -1,6 +1,9 @@
+import { state } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/_service/user.service';
+import { TeacherDashboardComponent } from '../dashboard/teacher/teacher-dashboard/teacher-dashboard.component';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,8 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
-    private userService : UserService
+    private userService : UserService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +31,12 @@ export class LoginComponent implements OnInit {
     response.subscribe(
       {
         next: data => {
+          if(data['roles'] === 'TEACHER') {
+          this.router.navigate(['teacher-dashboard'], { state: {rowDetail : data}})
+          }
+          if(data['roles'] === 'STUDENT') {
+            this.router.navigate(['student-dashboard'], { state: {rowDetail : data}})
+            }
           console.log("data" + data);
           console.log(data['email']);
           console.log(data['id']);
