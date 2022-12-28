@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { EnvironmentConstants } from 'src/environments/environment';
@@ -20,5 +20,11 @@ export class UserService {
   userLogin(loginPayload): Observable<any> {
     console.log("URL " +EnvironmentConstants.userLogin);
     return this.httpClient.post(EnvironmentConstants.userLogin, loginPayload)
+  }
+
+  getNotification(userType): Observable<any> {
+    console.log("URL " +EnvironmentConstants.userLogin);
+    return this.httpClient.get(EnvironmentConstants.getNotification, {params: new HttpParams().set('userRole', userType)    
+    });
   }
 }

@@ -3,6 +3,7 @@
     "data" : {
         "envName" : "dev",
         "userLogin" : "http://localhost:8080/signin",
-        "userRegistration" : "http://localhost:8080/registration"
+        "userRegistration" : "http://localhost:8080/registration",
+        "getNotification" : "http://localhost:8080/getNotification"
     }
 }

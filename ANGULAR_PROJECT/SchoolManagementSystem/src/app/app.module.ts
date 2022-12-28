@@ -13,6 +13,7 @@ import { ToastComponent } from './Component/toast/toast.component';
 import { EnvironmentConstants ,ConfigService } from '../environments/environment';
 import { TeacherDashboardComponent } from './Component/dashboard/teacher/teacher-dashboard/teacher-dashboard.component';
 import { StudentDashboardComponent } from './Component/dashboard/student/student-dashboard/student-dashboard.component';
+import { authInterceptorProviders } from './_helpers/authentication.interceptor';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { StudentDashboardComponent } from './Component/dashboard/student/student
       useFactory : (envConfigService : ConfigService) => () =>envConfigService.load().toPromise(),
       deps : [ConfigService],
       multi : true
-    }
+    },
+    authInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })

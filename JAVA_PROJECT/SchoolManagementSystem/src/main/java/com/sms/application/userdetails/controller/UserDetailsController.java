@@ -1,5 +1,7 @@
 package com.sms.application.userdetails.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +10,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sms.application.userdetails.dbpojo.NotificationDbPojo;
 import com.sms.application.userdetails.pojo.LoginRequest;
 import com.sms.application.userdetails.pojo.RegistrationRequestPojo;
 import com.sms.application.userdetails.pojo.RegistrationResponsePojo;
@@ -41,6 +46,12 @@ public class UserDetailsController {
 	  public ResponseEntity<?> userSignIn(@Valid @RequestBody LoginRequest loginRequest) throws Exception {
 		
 		return userDetails.userSignIn(loginRequest);
+	  }
+	
+	@GetMapping(path = "/getNotification")
+	  public ApplicationGenericResponse<List<NotificationDbPojo>> getNotification(@RequestParam String userRole) throws Exception {
+		
+		return ApplicationGenericResponse.success(userDetails.getNotification(userRole));
 	  }
 
 }

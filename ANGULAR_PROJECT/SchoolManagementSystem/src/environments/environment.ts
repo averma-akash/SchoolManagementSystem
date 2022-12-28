@@ -19,6 +19,7 @@ export class EnvironmentConstants {
   public static userLogin : string;
   public static userRegistration: string;
   public static envName : String;
+  public static getNotification : string;
 }
 @Injectable(
   {providedIn:'root'})
@@ -43,6 +44,7 @@ export class ConfigService {
             EnvironmentConstants.envName = data.envName;
             EnvironmentConstants.userLogin = data.userLogin;
             EnvironmentConstants.userRegistration = data.userRegistration;
+            EnvironmentConstants.getNotification = data.getNotification;
           }
           else {
             window.alert('Error')

@@ -1,5 +1,6 @@
 package com.sms.application.userdetails.serviceimpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -19,7 +20,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sms.application.exception.ApplicationException;
+import com.sms.application.userdetails.dao.NotificationDao;
 import com.sms.application.userdetails.dao.UserDetailDao;
+import com.sms.application.userdetails.dbpojo.NotificationDbPojo;
 import com.sms.application.userdetails.dbpojo.UserDetailsDbPojo;
 import com.sms.application.userdetails.pojo.LoginRequest;
 import com.sms.application.userdetails.pojo.RegistrationRequestPojo;
@@ -28,6 +31,7 @@ import com.sms.application.userdetails.pojo.UserDetailsPojo;
 import com.sms.application.userdetails.pojo.UserInfoResponse;
 import com.sms.application.userdetails.service.UserDetailService;
 import com.sms.application.utils.AppConstants;
+import com.sms.application.utils.ApplicationGenericResponse;
 import com.sms.application.utils.JWTUtils;
 
 @Service
@@ -35,6 +39,9 @@ public class UserDetailServiceImpl implements UserDetailService {
 
 	@Autowired
 	UserDetailDao dao;
+	
+	@Autowired
+	NotificationDao notifDao;
 
 	@Autowired
 	PasswordEncoder encoder;
@@ -88,6 +95,13 @@ public class UserDetailServiceImpl implements UserDetailService {
 		        .body(new UserInfoResponse(principal.getId(),
 		        		principal.getUsername(),
 		        		principal.getEmail(), principal.getRole()));
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public List<NotificationDbPojo> getNotification(String userRole) throws Exception {
+		// TODO Auto-generated method stub
+		return notifDao.findByuserType(userRole);
 	}
 
 }

@@ -2,6 +2,7 @@ import { state } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { TokenStorageService } from 'src/app/_service/JWTTokenStorage/token-storage.service';
 import { UserService } from 'src/app/_service/user.service';
 import { TeacherDashboardComponent } from '../dashboard/teacher/teacher-dashboard/teacher-dashboard.component';
 
@@ -17,12 +18,21 @@ export class LoginComponent implements OnInit {
     password: null
   }
 
+  isLoggedIn = false;
+  roles = '';
+
   constructor(
     private userService : UserService,
-    private router : Router
+    private router : Router,
+    private tokenStorage : TokenStorageService
   ) { }
 
   ngOnInit(): void {
+
+    if (this.tokenStorage.isLoggedIn()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
+    }
   }
 
   onSubmit() {
@@ -31,6 +41,9 @@ export class LoginComponent implements OnInit {
     response.subscribe(
       {
         next: data => {
+          
+          this.tokenStorage.saveUser(data);
+
           if(data['roles'] === 'TEACHER') {
           this.router.navigate(['teacher-dashboard'], { state: {rowDetail : data}})
           }
