@@ -13,6 +13,7 @@ export class StudentDashboardComponent implements OnInit {
   username = '';
   userRole = '';
   userId = '';
+  errorMessage ='';
 
   notificationData : any;
 
@@ -35,6 +36,8 @@ export class StudentDashboardComponent implements OnInit {
       },
       error: err => {
         console.log("Error");
+        this.errorMessage = err;
+        console.log("Error During fetching notification details !")
       }
     });
   }

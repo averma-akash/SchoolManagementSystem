@@ -31,11 +31,11 @@ export class ConfigService {
   constructor(private handler : HttpBackend) {}
   public load() : Observable<Configuration> {
 
-    const backed = new HttpClient(this.handler);
+    const client = new HttpClient(this.handler);
     console.log(this.config$);
 
     if(!this.config$) {
-      this.config$ = backed.get<Configuration>(`${this.envJson}`).pipe(shareReplay(1));
+      this.config$ = client.get<Configuration>(`${this.envJson}`).pipe(shareReplay(1));
       console.log(this.envJson);
       this.config$.subscribe({
         next : (envData: { [x: string]: any; }) => {

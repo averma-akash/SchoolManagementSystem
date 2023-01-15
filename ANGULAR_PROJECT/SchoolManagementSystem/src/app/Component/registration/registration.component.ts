@@ -60,6 +60,8 @@ export class RegistrationComponent implements OnInit {
       error: err => {
 
         this.isSignUpFailed = true;
+        this.errorMessage = err;
+        console.log("Error DUring registration process !")
       }
     });
 

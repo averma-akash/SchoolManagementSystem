@@ -14,6 +14,8 @@ import { EnvironmentConstants ,ConfigService } from '../environments/environment
 import { TeacherDashboardComponent } from './Component/dashboard/teacher/teacher-dashboard/teacher-dashboard.component';
 import { StudentDashboardComponent } from './Component/dashboard/student/student-dashboard/student-dashboard.component';
 import { authInterceptorProviders } from './_helpers/authentication.interceptor';
+import { SampleExampleComponent } from './Component/SampleExamples/sample-example/sample-example.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { authInterceptorProviders } from './_helpers/authentication.interceptor'
     ErrorComponent,
     ToastComponent,
     TeacherDashboardComponent,
-    StudentDashboardComponent
+    StudentDashboardComponent,
+    SampleExampleComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { authInterceptorProviders } from './_helpers/authentication.interceptor'
     HttpClientModule,
     NgbModalModule,
     NgbToastModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
   ],
   exports: [
     NgbToastModule

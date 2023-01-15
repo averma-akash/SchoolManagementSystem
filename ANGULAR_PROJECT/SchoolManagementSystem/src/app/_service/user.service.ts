@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { EnvironmentConstants } from 'src/environments/environment';
 
 @Injectable({
@@ -23,8 +23,15 @@ export class UserService {
   }
 
   getNotification(userType): Observable<any> {
-    console.log("URL " +EnvironmentConstants.userLogin);
+    
     return this.httpClient.get(EnvironmentConstants.getNotification, {params: new HttpParams().set('userRole', userType)    
-    });
+    }).pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        //Handle the error here
+        return throwError(() => (new Error(err)));    //Rethrow it back to component
+      })
+    );
   }
 }

@@ -5,13 +5,14 @@ import { TeacherDashboardComponent } from './Component/dashboard/teacher/teacher
 import { ErrorComponent } from './Component/error/error.component';
 import { LoginComponent } from './Component/login/login.component';
 import { RegistrationComponent } from './Component/registration/registration.component';
+import { RouterService } from './_service/router.service';
 
 const routes: Routes = [
   {path : '', component : LoginComponent},
   {path : 'login', component : LoginComponent},
   {path : 'signup', component : RegistrationComponent},
-  {path : 'teacher-dashboard', component : TeacherDashboardComponent},
-  {path : 'student-dashboard', component : StudentDashboardComponent},
+  {path : 'teacher-dashboard', component : TeacherDashboardComponent, canActivate : [RouterService]},
+  {path : 'student-dashboard', component : StudentDashboardComponent, canActivate : [RouterService]},
   {path : '**', component : ErrorComponent}
 ];
 
