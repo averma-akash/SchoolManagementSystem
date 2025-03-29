@@ -16,6 +16,7 @@ import { StudentDashboardComponent } from './Component/dashboard/student/student
 import { authInterceptorProviders } from './_helpers/authentication.interceptor';
 import { SampleExampleComponent } from './Component/SampleExamples/sample-example/sample-example.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgbToastModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   exports: [
     NgbToastModule
